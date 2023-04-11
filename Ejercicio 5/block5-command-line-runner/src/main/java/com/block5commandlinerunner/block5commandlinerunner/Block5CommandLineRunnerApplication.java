@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @SpringBootApplication
 
 public class Block5CommandLineRunnerApplication implements CommandLineRunner{
@@ -28,9 +30,12 @@ public class Block5CommandLineRunnerApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		claseInicial.imprimirHola();
-		claseSecundaria.imprimirHola();
-		terceraClase.imprimirHola();
+		ArrayList<String> argumentos = new ArrayList<String>();
+
+		argumentos.add(claseInicial.imprimirHola());
+		argumentos.add(claseSecundaria.imprimirHola());
+		terceraClase.imprimirHola(argumentos);
+
 	}
 
 

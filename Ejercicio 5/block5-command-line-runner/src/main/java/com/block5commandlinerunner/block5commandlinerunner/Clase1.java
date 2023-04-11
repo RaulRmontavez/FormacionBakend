@@ -5,8 +5,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Clase1 {
-    @PostConstruct
-    public void imprimirHola() {
-        System.out.println("Hola desde clase inicial");
+    public String imprimirHola() {
+        String Texto = "Hola desde clase primaria";
+        System.out.println(Texto);
+        return Texto;
     }
 }

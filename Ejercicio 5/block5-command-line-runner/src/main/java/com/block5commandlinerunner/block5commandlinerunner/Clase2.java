@@ -8,9 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class Clase2 implements CommandLineRunner {
 
-    @PostConstruct
-    public void imprimirHola() {
-        System.out.println("Hola desde clase secundaria");
+
+    public String imprimirHola() {
+        String Texto = "Hola desde clase secundaria";
+        System.out.println(Texto);
+        return Texto;
     }
 
     @Override
