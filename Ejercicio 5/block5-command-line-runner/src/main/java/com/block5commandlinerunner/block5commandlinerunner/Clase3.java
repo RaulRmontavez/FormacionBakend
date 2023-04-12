@@ -10,13 +10,15 @@ import java.util.ArrayList;
 @Component
 public class Clase3 implements CommandLineRunner{
 
+ArrayList<String> argumentos = new ArrayList<String>();
+public void AddList(String texto){
+    argumentos.add(texto);
+}
 
-
-
-    public void imprimirHola(ArrayList<String> args) {
+    public void imprimirHola() {
         System.out.println("Hola desde clase tercera");
 
-        for (String arg : args) {
+        for (String arg : argumentos) {
             System.out.println(arg + " ");
         }
         System.out.println();

@@ -5,14 +5,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import static com.block5commandlinerunner.block5commandlinerunner.Block5CommandLineRunnerApplication.terceraClase;
+
 @Component
 public class Clase2 implements CommandLineRunner {
 
 
-    public String imprimirHola() {
+    public void imprimirHola() {
         String Texto = "Hola desde clase secundaria";
         System.out.println(Texto);
-        return Texto;
+        terceraClase.AddList(Texto);
     }
 
     @Override
