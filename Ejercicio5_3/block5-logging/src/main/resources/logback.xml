@@ -13,7 +13,7 @@
     </appender>
 
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>logs/app.log</file>
+        <file>logs/error.log</file>
         <append>true</append>
         <encoder>
             <pattern>%d %p %logger{1} - %m%n</pattern>
