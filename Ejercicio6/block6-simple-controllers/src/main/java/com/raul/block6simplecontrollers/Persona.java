@@ -1,5 +1,8 @@
 package com.raul.block6simplecontrollers;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class Persona {
     private String nombre;
     private String poblacion;
@@ -11,6 +14,9 @@ public class Persona {
         this.edad = edad;
     }
 
+    public Persona(){
+
+    }
 
     public String getNombre() {
         return nombre;
