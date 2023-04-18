@@ -3,11 +3,18 @@ package com.raul.block6simplecontrollers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 
 public class Controlador1 {
+
+
+    ArrayList<Ciudad> ciudades = new ArrayList<Ciudad>();
     @Autowired
     protected Persona p;
+
 
     @GetMapping("/user/{nombre}")
     public String saludo(@PathVariable String nombre){
@@ -31,8 +38,19 @@ public class Controlador1 {
         System.out.println(p);
     }
 
+    @PostMapping("/controlador1/addCiudad")
+    public void crearCiudad(@RequestBody Ciudad ciudad){
+        ciudades.add(ciudad);
+        System.out.println(ciudad);
+
+    }
+
     public Persona pasarPersona(){
         return p;
+    }
+
+    public ArrayList<Ciudad> pasarCiudades(){
+        return ciudades;
     }
 
 

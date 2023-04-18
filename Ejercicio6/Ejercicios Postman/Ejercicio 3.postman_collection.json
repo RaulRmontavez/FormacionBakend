@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "a3ef4c7a-f9cd-4c48-af62-59b15272a614",
+		"name": "Ejercicio 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26939952"
+	},
+	"item": [
+		{
+			"name": "addCiudad",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "nombre",
+						"value": "Bedmar",
+						"type": "text"
+					},
+					{
+						"key": "numeroHabitantes",
+						"value": "6",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/controlador1/addCiudad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"controlador1",
+						"addCiudad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCiudades",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

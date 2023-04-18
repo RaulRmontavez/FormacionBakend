@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "2fc39f63-6288-44c6-804d-25f99723e0fd",
+		"name": "Ejercicio 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26939952"
+	},
+	"item": [
+		{
+			"name": "user/raul",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/raul",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"raul"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/useradd",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "nombre",
+						"value": "Juan",
+						"type": "text"
+					},
+					{
+						"key": "poblacion",
+						"value": "Bedmar",
+						"type": "text"
+					},
+					{
+						"key": "edad",
+						"value": "15",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Raul\",\r\n    \"poblacion\": \"Jodar\",\r\n    \"edad\": 19\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/useradd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"useradd"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
