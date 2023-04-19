@@ -1,6 +1,0 @@
-spring:
-  profiles:
-    active: INTEGRATION
-bd:
-  url: int.bosonit.com:5432
-
