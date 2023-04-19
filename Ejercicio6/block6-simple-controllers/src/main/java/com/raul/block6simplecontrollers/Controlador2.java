@@ -14,7 +14,7 @@ public class Controlador2 {
     protected Controlador1 controlador1;
 
 
-    @GetMapping("/controlador2/getPersona")
+   @GetMapping("/controlador2/getPersona")
     public Persona conseguirPersona(){
         return controlador1.pasarPersona();
 
@@ -25,5 +25,8 @@ public class Controlador2 {
         return controlador1.pasarCiudades();
 
     }
+
+
+
 
 }

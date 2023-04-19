@@ -1,0 +1,18 @@
+{
+	"info": {
+		"_postman_id": "50fb14a0-eb1f-4f04-8619-b390ea221e3a",
+		"name": "Ejercicio 4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26939952"
+	},
+	"item": [
+		{
+			"name": "BeanController",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
