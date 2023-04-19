@@ -1,3 +1,2 @@
 # FormacionBackend
-EJERCICIO 1: Ejercicio de java
-Ejercicio 2:
+![FORMACION DE BACKEND](https://github.com/RaulRmontavez/FormacionBakend/blob/main/Portada.png?raw=true)
