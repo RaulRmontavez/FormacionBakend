@@ -1,4 +1,4 @@
-package com.block7crud.block7crud;
+package com.raul.block7crud;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

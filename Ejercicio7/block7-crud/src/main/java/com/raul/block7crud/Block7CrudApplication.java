@@ -1,4 +1,4 @@
-package com.block7crud.block7crud;
+package com.raul.block7crud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
