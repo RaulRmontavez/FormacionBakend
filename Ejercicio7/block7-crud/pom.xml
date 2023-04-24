@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.5</version>
+		<version>3.0.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.raul</groupId>
 	<artifactId>block7-crud</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>block7-crud</name>
-	<description>block7-crud SpringBoot Data</description>
+	<description>block7-crud ejercicio 1 bloque 7</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
