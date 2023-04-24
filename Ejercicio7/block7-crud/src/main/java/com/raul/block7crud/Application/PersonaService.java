@@ -15,6 +15,6 @@ public interface PersonaService {
     List<PersonaOutputDto> getPersonaAll();
     void deletePersonaById( int id);
     Iterable<PersonaOutputDto> getAllPersonas(int pageNumber, int pageSize);
-    PersonaOutputDto updatePersona(PersonaInputDto student);
+    PersonaOutputDto updatePersona(PersonaInputDto persona, int id);
 
 }

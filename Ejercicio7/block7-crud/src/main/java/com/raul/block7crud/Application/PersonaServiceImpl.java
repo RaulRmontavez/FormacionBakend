@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,9 +55,13 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public PersonaOutputDto updatePersona(PersonaInputDto persona) {
-        personaRepository.findById(persona.getId()).orElseThrow();
-        return personaRepository.save(new Persona(persona))
-                .personaToPersonaOutputDto();
+    public PersonaOutputDto updatePersona(PersonaInputDto persona,int id) {
+        Optional<Persona> existingPersona = personaRepository.findById(id);
+        if (existingPersona == null) {
+            throw new NoSuchElementException("Persona not found with id: " + id);
+        }
+        Persona updatedPersona = new Persona(persona);
+        updatedPersona.setId(id);
+        return personaRepository.save(updatedPersona).personaToPersonaOutputDto();
     }
 }
