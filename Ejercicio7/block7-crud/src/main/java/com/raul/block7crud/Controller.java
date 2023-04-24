@@ -13,7 +13,7 @@ public class Controller {
     @Autowired
     StudentServiceImpl studentService;
 
-    @PostMapping
+   @PostMapping
     public ResponseEntity<StudentOutputDto> addStudent(@RequestBody StudentInputDto student) {
         URI location = URI.create("/student");
         return ResponseEntity.created(location).body(studentService.addStudent(student));
