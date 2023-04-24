@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonaServiceImpl implements PersonaService {
@@ -25,6 +26,16 @@ public class PersonaServiceImpl implements PersonaService {
     @Override
     public PersonaOutputDto getPersonaById(int id) {
         return personaRepository.findById(id).orElseThrow().personaToPersonaOutputDto();
+    }
+
+    @Override
+    public List<PersonaOutputDto> getPersonaByName(String name) {
+        return personaRepository.findByName(name).stream().map(Persona::personaToPersonaOutputDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PersonaOutputDto> getPersonaAll() {
+        return personaRepository.findAll().stream().map(Persona::personaToPersonaOutputDto).collect(Collectors.toList());
     }
 
     @Override
