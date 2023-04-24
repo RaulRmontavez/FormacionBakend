@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "7ff7343e-a048-40d5-833f-8ce1baf87902",
+		"name": "Bloque 7 ejercicio 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26939952"
+	},
+	"item": [
+		{
+			"name": "Ejercicio 1 Agregar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Raul\",\r\n    \"edad\":\"19\",\r\n    \"poblacion\":\"Jodar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ejercicio1 Mostrar por Nombre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/name/Jose",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"name",
+						"Jose"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ejercicio1 Mostrar por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/id/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"id",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ejercicio1 Mostrar todo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ejercicio1 Modificar",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Manuel\",\r\n    \"edad\": \"21\",\r\n    \"poblacion\": \"Bedmar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ejercicio1 Eliminar",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
