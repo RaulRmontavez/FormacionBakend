@@ -39,8 +39,19 @@ public class Persona {
     }
 
     public Persona(PersonaInputDto persona) {
+
         id_persona = persona.getId_persona();
+        usuario = persona.getUsuario();
+        password = persona.getPassword();
         name = persona.getName();
+        surname = persona.getSurname();
+        company_email = persona.getCompany_email();
+        city = persona.getCity();
+        active = persona.isActive();
+        created_date = persona.getCreated_date();
+        imagen_url = persona.getImagen_url();
+        termination_date = persona.getTermination_date();
+
 
     }
 

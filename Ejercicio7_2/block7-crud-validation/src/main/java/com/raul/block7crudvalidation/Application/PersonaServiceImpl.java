@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -22,8 +23,21 @@ public class PersonaServiceImpl implements PersonaService {
 
 
     @Override
-    public PersonaOutputDto addPersona(PersonaInputDto persona) {
-        return personaRepository.save(new Persona(persona)).personaToPersonaOutputDto();
+    public PersonaOutputDto addPersona(PersonaInputDto persona) throws Exception {
+        if (Objects.isNull(persona.getUsuario()) || persona.getUsuario().isBlank()){throw new Exception("El usuario no puede estar vacio");}
+        else if (persona.getUsuario().length()>10){throw new Exception("Longitud de usuario no puede ser superior a 10 caracteres");}
+        else if (Objects.isNull(persona.getPassword())){throw new Exception("La contraseña no puede estar vacio");}
+        else if (Objects.isNull(persona.getName())){throw new Exception("El nombre no puede estar vacio");}
+        else if (Objects.isNull(persona.getSurname())){throw new Exception("El surname no puede estar vacio");}
+        else if (Objects.isNull(persona.getCompany_email())){throw new Exception("La compañia de email no puede estar vacia");}
+        else if (Objects.isNull(persona.getCity())){throw new Exception("La ciudad no puede estar vacia");}
+        else if (Objects.isNull(persona.isActive())){throw new Exception("El activo no puede estar vacio");}
+        else if (Objects.isNull(persona.getCreated_date())){throw new Exception("La fecha de creacion no puede estar vacia");}
+        else if (Objects.isNull(persona.getImagen_url())){throw new Exception("La url de imagen no puede estar vacio");}
+        else if (Objects.isNull(persona.getTermination_date())){throw new Exception("La fecha de finalizacion no puede estar vacio");}
+        else {
+            return personaRepository.save(new Persona(persona)).personaToPersonaOutputDto();
+        }
     }
 
     @Override
