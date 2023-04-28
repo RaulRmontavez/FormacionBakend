@@ -14,5 +14,7 @@ public interface PersonaService {
     PersonaOutputDto getPersonaById(int id);
     List<PersonaOutputDto> getPersonaByName(String name);
     Iterable<PersonaOutputDto> getAllPersonas(int pageNumber, int pageSize);
+    PersonaOutputDto updatePersona(PersonaInputDto persona, int id);
+    void deletePersonaById( int id);
 
 }

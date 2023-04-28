@@ -14,18 +14,18 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id_student;
-    @OneToOne
-    @JoinColumn(name = "id_persona")
+   // @OneToOne
+  //  @JoinColumn(name = "id_persona")
     Persona persona;
-    @Column(name = "horas_por_semana")
+   // @Column(name = "horas_por_semana")
     Integer num_hours_week;
-    @Column(name = "comentarios")
+  //  @Column(name = "comentarios")
     String coments;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_profesor")
+  //  @ManyToOne(fetch = FetchType.LAZY)
+  //  @JoinColumn(name = "id_profesor")
     Profesor profesor;
-    @Column(name = "rama")
+  //  @Column(name = "rama")
     String branch;
-    @OneToMany
+   // @OneToMany
     List<Alumnos_Estudios> estudios;
 }

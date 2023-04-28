@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -81,5 +82,21 @@ public class PersonaServiceImpl implements PersonaService {
         }
     }
 
+    @Override
+    public void deletePersonaById(int id) {
+        personaRepository.findById(id).orElseThrow();
+        personaRepository.deleteById(id);
+    }
+
+    @Override
+    public PersonaOutputDto updatePersona(PersonaInputDto persona,int id) {
+        Optional<Persona> existingPersona = personaRepository.findById(id);
+        if (existingPersona == null) {
+            throw new NoSuchElementException("Persona not found with id: " + id);
+        }
+        Persona updatedPersona = new Persona(persona);
+        updatedPersona.setId_persona(id);
+        return personaRepository.save(updatedPersona).personaToPersonaOutputDto();
+    }
 
 }

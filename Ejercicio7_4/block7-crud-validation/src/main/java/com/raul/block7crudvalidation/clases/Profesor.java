@@ -14,16 +14,16 @@ public class Profesor {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id_profesor;
-    @OneToOne
-    @JoinColumn(name = "id_persona")
+  //  @OneToOne
+    //@JoinColumn(name = "id_persona")
     Persona persona;
-    @Column(name = "comentarios")
+  //  @Column(name = "comentarios")
     String coments;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_students")
+   // @OneToMany(fetch = FetchType.LAZY)
+   // @JoinColumn(name = "id_students")
     Alumnos_Estudios alumnosEstudios;
-    @Column(name = "rama")
+   // @Column(name = "rama")
     String branch;
-    @OneToMany
+    //@OneToMany
     List<Alumnos_Estudios> estudios;
 }
