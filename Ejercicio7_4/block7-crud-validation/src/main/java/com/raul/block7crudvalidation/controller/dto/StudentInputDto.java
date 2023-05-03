@@ -13,7 +13,7 @@ import java.util.List;
 public class StudentInputDto {
 
     private Integer id_student;
-    private Persona persona;
+    private Integer persona;
     private Integer num_hours_week;
     private String coments;
     private Profesor profesor;

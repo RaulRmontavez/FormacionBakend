@@ -17,7 +17,7 @@ import java.util.List;
 public class Alumnos_EstudiosOutputDto {
     private Integer id_study;
     private Profesor profesor;
-    private Student student;
+    private List<Student> student;
     private String asignatura;
     private String comment;
     private Date initial_date;

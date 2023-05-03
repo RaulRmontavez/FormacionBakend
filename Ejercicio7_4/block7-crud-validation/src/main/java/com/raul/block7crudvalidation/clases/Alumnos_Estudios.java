@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "estudios")
@@ -14,11 +15,12 @@ public class Alumnos_Estudios {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id_study;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne
     @JoinColumn(name = "profesor_id")
     Profesor profesor;
     @ManyToMany(cascade = CascadeType.ALL)
-    Student student;
+    List<Student> student;
     @Column(name = "asignatura")
     String asignatura;
     @Column(name = "comentarios")

@@ -14,7 +14,7 @@ public interface ProfesorService {
 
     ProfesorOutputDto addProfesor(ProfesorInputDto profesor) throws Exception;
     ProfesorOutputDto getProfesorById(int id);
-    List<ProfesorOutputDto> getProfesorByName(String name);
+    //List<ProfesorOutputDto> getProfesorByName(String name);
     Iterable<ProfesorOutputDto> getAllProfesor(int pageNumber, int pageSize);
     ProfesorOutputDto updateProfesor(ProfesorInputDto profesor, int id);
     void deleteProfesorById( int id);

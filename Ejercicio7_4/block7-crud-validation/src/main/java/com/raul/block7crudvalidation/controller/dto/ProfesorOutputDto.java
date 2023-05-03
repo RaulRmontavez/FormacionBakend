@@ -20,7 +20,7 @@ public class ProfesorOutputDto {
 
     private String coments;
 
-    private Alumnos_Estudios alumnosEstudios;
+    private List<Alumnos_Estudios>  alumnosEstudios;
 
     private String branch;
 

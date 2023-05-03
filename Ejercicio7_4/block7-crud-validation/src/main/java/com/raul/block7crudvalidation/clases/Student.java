@@ -1,31 +1,59 @@
 package com.raul.block7crudvalidation.clases;
 
+import com.raul.block7crudvalidation.controller.dto.ProfesorInputDto;
+import com.raul.block7crudvalidation.controller.dto.ProfesorOutputDto;
+import com.raul.block7crudvalidation.controller.dto.StudentInputDto;
+import com.raul.block7crudvalidation.controller.dto.StudentOutputDto;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "estudiantes")
 @Getter
 @Setter
-public class Student {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Student   {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id_student;
-   // @OneToOne
-  //  @JoinColumn(name = "id_persona")
+    @OneToOne
+    @JoinColumn(name = "id_persona")
     Persona persona;
-   // @Column(name = "horas_por_semana")
+    @Column(name = "horas_por_semana")
     Integer num_hours_week;
-  //  @Column(name = "comentarios")
+    @Column(name = "comentarios")
     String coments;
-  //  @ManyToOne(fetch = FetchType.LAZY)
-  //  @JoinColumn(name = "id_profesor")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_profesor")
     Profesor profesor;
-  //  @Column(name = "rama")
+    @Column(name = "rama")
     String branch;
-   // @OneToMany
+    @OneToMany
     List<Alumnos_Estudios> estudios;
+
+
+    public Student(StudentInputDto student) {
+
+        id_student = student.getId_student();
+        persona = null;
+        num_hours_week = student.getNum_hours_week();
+        coments = student.getComents();
+        profesor = null;
+        branch = student.getBranch();
+
+    }
+
+
+
+    public StudentOutputDto StudentOutputDto() {
+        return new StudentOutputDto(this.id_student,this.num_hours_week,this.coments,this.profesor,this.branch,this.estudios,this.persona.getId_persona(),this.persona.getUsuario(),this.persona.getPassword(),this.persona.getName(),this.persona.getSurname(),this.persona.getCompany_email(),this.persona.getCity(),this.persona.isActive(),this.persona.getCreated_date(),this.persona.getImagen_url(),this.persona.getTermination_date());
+    }
+
 }

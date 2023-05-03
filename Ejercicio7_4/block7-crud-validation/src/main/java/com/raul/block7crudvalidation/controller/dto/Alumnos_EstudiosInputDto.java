@@ -17,7 +17,7 @@ public class Alumnos_EstudiosInputDto {
 
     private Integer id_study;
     private Profesor profesor;
-    private Student student;
+    private List<Student> student;
     private String asignatura;
     private String comment;
     private Date initial_date;
