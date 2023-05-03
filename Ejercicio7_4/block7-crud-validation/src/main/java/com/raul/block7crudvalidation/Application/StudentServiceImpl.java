@@ -4,10 +4,7 @@ package com.raul.block7crudvalidation.Application;
 import com.raul.block7crudvalidation.clases.Persona;
 import com.raul.block7crudvalidation.clases.Profesor;
 import com.raul.block7crudvalidation.clases.Student;
-import com.raul.block7crudvalidation.controller.dto.ProfesorInputDto;
-import com.raul.block7crudvalidation.controller.dto.ProfesorOutputDto;
-import com.raul.block7crudvalidation.controller.dto.StudentInputDto;
-import com.raul.block7crudvalidation.controller.dto.StudentOutputDto;
+import com.raul.block7crudvalidation.controller.dto.*;
 import com.raul.block7crudvalidation.exceptions.EntityNotFoundException;
 import com.raul.block7crudvalidation.repository.PersonaRepository;
 import com.raul.block7crudvalidation.repository.ProfesorRepository;
@@ -69,6 +66,14 @@ public class StudentServiceImpl implements StudentService {
         Optional<Student> personaOptional = studentRepository.findById(id);
         Student student = personaOptional.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
         StudentOutputDto studentOutputDto = student.StudentOutputDto();
+        return studentOutputDto;
+    }
+
+    @Override
+    public StudentOutputDtoSimple getStudentByIdSimple(int id) {
+        Optional<Student> personaOptional = studentRepository.findById(id);
+        Student student = personaOptional.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+        StudentOutputDtoSimple studentOutputDto = student.StudentOutputDtoSimple();
         return studentOutputDto;
     }
 

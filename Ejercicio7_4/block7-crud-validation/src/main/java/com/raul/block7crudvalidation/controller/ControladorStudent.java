@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/student")
@@ -22,12 +23,27 @@ public class ControladorStudent {
 
     //Obtener los estudiantes
     @GetMapping("id/{id}")
-    public ResponseEntity<StudentOutputDto> getStudentById(@PathVariable int id) {
-        try {
-            return ResponseEntity.ok().body(studentService.getStudentById(id));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<Object> getStudentById(@PathVariable int id, @RequestParam String outputType) {
+
+        if (outputType.equals("full")){
+            try {
+                return ResponseEntity.ok().body(studentService.getStudentById(id));
+            } catch (Exception e) {
+                return ResponseEntity.notFound().build();
+            }
+
         }
+        else if (outputType.equals("simple")){
+            try {
+                return ResponseEntity.ok().body(studentService.getStudentByIdSimple(id));
+            } catch (Exception e) {
+                return ResponseEntity.notFound().build();
+            }
+        }
+        else{
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 
    /* @GetMapping("name/{name}")

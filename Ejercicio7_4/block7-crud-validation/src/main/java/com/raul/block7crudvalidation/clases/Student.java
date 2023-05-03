@@ -1,9 +1,6 @@
 package com.raul.block7crudvalidation.clases;
 
-import com.raul.block7crudvalidation.controller.dto.ProfesorInputDto;
-import com.raul.block7crudvalidation.controller.dto.ProfesorOutputDto;
-import com.raul.block7crudvalidation.controller.dto.StudentInputDto;
-import com.raul.block7crudvalidation.controller.dto.StudentOutputDto;
+import com.raul.block7crudvalidation.controller.dto.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -54,6 +51,10 @@ public class Student   {
 
     public StudentOutputDto StudentOutputDto() {
         return new StudentOutputDto(this.id_student,this.num_hours_week,this.coments,this.profesor,this.branch,this.estudios,this.persona.getId_persona(),this.persona.getUsuario(),this.persona.getPassword(),this.persona.getName(),this.persona.getSurname(),this.persona.getCompany_email(),this.persona.getCity(),this.persona.isActive(),this.persona.getCreated_date(),this.persona.getImagen_url(),this.persona.getTermination_date());
+    }
+
+    public StudentOutputDtoSimple StudentOutputDtoSimple() {
+        return new StudentOutputDtoSimple(this.id_student,this.persona.getId_persona(),this.num_hours_week,this.coments,this.profesor,this.branch,this.estudios);
     }
 
 }
