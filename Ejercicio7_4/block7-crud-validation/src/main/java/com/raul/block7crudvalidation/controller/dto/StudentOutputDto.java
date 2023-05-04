@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class StudentOutputDto {
     private Integer id_student;
+
     private Integer num_hours_week;
     private String coments;
     private Profesor profesor;

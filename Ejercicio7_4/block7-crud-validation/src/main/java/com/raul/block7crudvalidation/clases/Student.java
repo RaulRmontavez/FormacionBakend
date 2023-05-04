@@ -21,7 +21,7 @@ public class Student   {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id_student;
     @OneToOne
-    @JoinColumn(name = "id_persona")
+    @JoinColumn(name = "id_persona",nullable = false,unique = true)
     Persona persona;
     @Column(name = "horas_por_semana")
     Integer num_hours_week;

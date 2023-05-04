@@ -2,10 +2,7 @@ package com.raul.block7crudvalidation.clases;
 
 import com.raul.block7crudvalidation.controller.dto.PersonaInputDto;
 import com.raul.block7crudvalidation.controller.dto.PersonaOutputDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,16 +18,25 @@ public class Persona {
     @GeneratedValue
     @Id
     int id_persona;
+    @Column(name = "usuario",nullable = false)
     String usuario;
+    @Column(name = "password",nullable = false)
     String password;
+    @Column(name = "nombre",nullable = false)
     String name;
+    @Column(name = "surname")
     String surname;
+    @Column(name = "compañia Email",nullable = false)
     String company_email;
-
+    @Column(name = "ciudad",nullable = false)
     String city;
+    @Column(name = "activo",nullable = false)
     boolean active;
+    @Column(name = "fecha de creacion",nullable = false)
     Date created_date;
+    @Column(name = "url de imagen")
     String imagen_url;
+    @Column(name = "Fecha de finalizacion")
     Date termination_date;
 
 

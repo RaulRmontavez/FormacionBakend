@@ -29,14 +29,8 @@ public class Profesor   {
     @Column(name = "comentarios")
     String coments;
 
-    @OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Alumnos_Estudios> alumnosEstudios = new ArrayList<>();
-
-    @Column(name = "rama")
+    @Column(name = "rama",nullable = false)
     String branch;
-
-    @OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Alumnos_Estudios> estudios = new ArrayList<>();
 
     public Profesor(int id_profesor) {
         this.id_profesor = id_profesor;
@@ -49,6 +43,6 @@ public class Profesor   {
     }
 
     public ProfesorOutputDto profesorOutputDto() {
-        return new ProfesorOutputDto(this.id_profesor, this.persona, this.coments, this.alumnosEstudios, this.branch, this.estudios);
+        return new ProfesorOutputDto(this.id_profesor, this.persona, this.coments, this.branch);
     }
 }

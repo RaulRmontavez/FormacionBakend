@@ -63,16 +63,16 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentOutputDto getStudentById(int id) {
-        Optional<Student> personaOptional = studentRepository.findById(id);
-        Student student = personaOptional.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        Student student = studentOptional.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
         StudentOutputDto studentOutputDto = student.StudentOutputDto();
         return studentOutputDto;
     }
 
     @Override
     public StudentOutputDtoSimple getStudentByIdSimple(int id) {
-        Optional<Student> personaOptional = studentRepository.findById(id);
-        Student student = personaOptional.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        Student student = studentOptional.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ningun estudiante por ese id", 404));
         StudentOutputDtoSimple studentOutputDto = student.StudentOutputDtoSimple();
         return studentOutputDto;
     }

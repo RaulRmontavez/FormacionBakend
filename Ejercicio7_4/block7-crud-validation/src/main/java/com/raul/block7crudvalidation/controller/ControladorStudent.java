@@ -60,33 +60,33 @@ public class ControladorStudent {
         }*/
 
 
-    //Agregar una persona
+    //Agregar un estudiante
     @PostMapping
     public ResponseEntity<StudentOutputDto> addStudent(@RequestBody StudentInputDto student) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addStudent(student));
     }
 
-    //Borrar una persona
-   /* @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePersonaById(@PathVariable int id) {
+    //Borrar un estudiante
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteStudentById(@PathVariable int id) {
         try {
-            studentService.deletePersonaById(id);
-            return ResponseEntity.ok().body("persona with id: "+id+" was deleted");
+            studentService.deleteStudentById(id);
+            return ResponseEntity.ok().body("Student with id: "+id+" was deleted");
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
 
         }
-    }*/
-    //Modificar una persona
-  /*  @PutMapping("/{id}")
-    public ResponseEntity<PersonaOutputDto> updatePersona(@RequestBody PersonaInputDto persona, @PathVariable int id) {
+    }
+    //Modificar un estudiante
+    @PutMapping("/{id}")
+    public ResponseEntity<StudentOutputDto> updateStudent(@RequestBody StudentInputDto student, @PathVariable int id) {
         try {
-            studentService.getPersonaById(id);
-            studentService.updatePersona(persona,id);
-            return  ResponseEntity.ok().body(studentService.getPersonaById(id));
+            studentService.getStudentById(id);
+            studentService.updateStudent(student,id);
+            return  ResponseEntity.ok().body(studentService.getStudentById(id));
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
-*/
+
 }
