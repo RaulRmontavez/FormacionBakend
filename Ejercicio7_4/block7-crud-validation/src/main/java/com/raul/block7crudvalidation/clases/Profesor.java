@@ -1,10 +1,7 @@
 package com.raul.block7crudvalidation.clases;
 
 import com.raul.block7crudvalidation.Application.PersonaService;
-import com.raul.block7crudvalidation.controller.dto.PersonaInputDto;
-import com.raul.block7crudvalidation.controller.dto.PersonaOutputDto;
-import com.raul.block7crudvalidation.controller.dto.ProfesorInputDto;
-import com.raul.block7crudvalidation.controller.dto.ProfesorOutputDto;
+import com.raul.block7crudvalidation.controller.dto.*;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Type;
@@ -43,6 +40,10 @@ public class Profesor   {
     }
 
     public ProfesorOutputDto profesorOutputDto() {
+        return new ProfesorOutputDto(this.id_profesor, this.persona, this.coments, this.branch);
+    }
+
+    public ProfesorOutputDto profesorOutputDtoSimple() {
         return new ProfesorOutputDto(this.id_profesor, this.persona, this.coments, this.branch);
     }
 }
