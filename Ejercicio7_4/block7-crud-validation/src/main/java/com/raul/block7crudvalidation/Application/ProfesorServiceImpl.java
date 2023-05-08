@@ -60,16 +60,16 @@ public class ProfesorServiceImpl implements ProfesorService {
         Persona persona1 = persona.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
 
         Profesor profe = new Profesor(profesor);
-            if (persona.get().getPuesto().equals("Estudiante")){
-                throw new UnprocessableEntityException("Esta persona ya es un estudiante");
-            }else if (persona.get().getPuesto().equals("Profesor")){
-                throw new UnprocessableEntityException("Esta persona ya es un profesor");
-            }
+        if (persona.get().getPuesto().equals("Estudiante")) {
+            throw new UnprocessableEntityException("Esta persona ya es un estudiante");
+        } else if (persona.get().getPuesto().equals("Profesor")) {
+            throw new UnprocessableEntityException("Esta persona ya es un profesor");
+        }
         persona.orElseThrow().setPuesto("Profesor");
-            profe.setPersona(persona.orElseThrow());
+        profe.setPersona(persona.orElseThrow());
 
 
-            return profesorRepository.save(profe).profesorOutputDto();
+        return profesorRepository.save(profe).profesorOutputDto();
         //}
     }
 
@@ -109,7 +109,7 @@ public class ProfesorServiceImpl implements ProfesorService {
     }
 
     @Override
-    public ProfesorOutputDto updateProfesor(ProfesorInputDto profesor,int id) {
+    public ProfesorOutputDto updateProfesor(ProfesorInputDto profesor, int id) {
         Optional<Profesor> existingProfesor = profesorRepository.findById(id);
         if (existingProfesor == null) {
             throw new NoSuchElementException("Persona not found with id: " + id);
