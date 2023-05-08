@@ -6,6 +6,7 @@ import com.raul.block7crudvalidation.clases.Profesor;
 import com.raul.block7crudvalidation.clases.Student;
 import com.raul.block7crudvalidation.controller.dto.*;
 import com.raul.block7crudvalidation.exceptions.EntityNotFoundException;
+import com.raul.block7crudvalidation.exceptions.UnprocessableEntityException;
 import com.raul.block7crudvalidation.repository.PersonaRepository;
 import com.raul.block7crudvalidation.repository.ProfesorRepository;
 import com.raul.block7crudvalidation.repository.StudentRepository;
@@ -51,12 +52,21 @@ public class StudentServiceImpl implements StudentService {
             throw new UnprocessableEntityException("La fecha de finalizacion no puede estar vacio");
         } else {*/
 
+        Optional<Persona> id_persona = personaRepository.findById(student.getPersona());
+        Persona persona = id_persona.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
 
 
-            Optional<Persona> id_persona = personaRepository.findById(student.getPersona());
-            Persona persona = id_persona.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+        Student student1 = new Student(student);
+        if (id_persona.get().getPuesto().equals("Estudiante")) {
+            throw new UnprocessableEntityException("Esta persona ya es un estudiante");
+        } else if (id_persona.get().getPuesto().equals("Profesor")) {
+            throw new UnprocessableEntityException("Esta persona ya es un profesor");
+        }
+        id_persona.orElseThrow().setPuesto("Estudiante");
+        student1.setPersona(id_persona.orElseThrow());
 
-            return studentRepository.save(new Student(student.getId_student(), persona, student.getNum_hours_week(), student.getComents(), student.getProfesor(), student.getBranch(), student.getEstudios())).StudentOutputDto();
+
+        return studentRepository.save(student1).StudentOutputDto();
 
         //}
     }
@@ -105,7 +115,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentOutputDto updateStudent(StudentInputDto student,int id) {
+    public StudentOutputDto updateStudent(StudentInputDto student, int id) {
         Optional<Student> existingStudent = studentRepository.findById(id);
         if (existingStudent == null) {
             throw new NoSuchElementException("Persona not found with id: " + id);

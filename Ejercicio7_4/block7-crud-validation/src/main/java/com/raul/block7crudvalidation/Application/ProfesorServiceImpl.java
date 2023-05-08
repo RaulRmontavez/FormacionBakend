@@ -11,6 +11,7 @@ import com.raul.block7crudvalidation.exceptions.EntityNotFoundException;
 import com.raul.block7crudvalidation.exceptions.UnprocessableEntityException;
 import com.raul.block7crudvalidation.repository.PersonaRepository;
 import com.raul.block7crudvalidation.repository.ProfesorRepository;
+import com.raul.block7crudvalidation.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,9 @@ import java.util.stream.Collectors;
 public class ProfesorServiceImpl implements ProfesorService {
     @Autowired
     ProfesorRepository profesorRepository;
+
+    @Autowired
+    PersonaRepository personaRepository;
 
 
     @Override
@@ -52,7 +56,20 @@ public class ProfesorServiceImpl implements ProfesorService {
         } else if (Objects.isNull(persona.getTermination_date())) {
             throw new UnprocessableEntityException("La fecha de finalizacion no puede estar vacio");
         } else {*/
-            return profesorRepository.save(new Profesor(profesor)).profesorOutputDto();
+        Optional<Persona> persona = personaRepository.findById(profesor.getPersona());
+        Persona persona1 = persona.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+
+        Profesor profe = new Profesor(profesor);
+            if (persona.get().getPuesto().equals("Estudiante")){
+                throw new UnprocessableEntityException("Esta persona ya es un estudiante");
+            }else if (persona.get().getPuesto().equals("Profesor")){
+                throw new UnprocessableEntityException("Esta persona ya es un profesor");
+            }
+        persona.orElseThrow().setPuesto("Profesor");
+            profe.setPersona(persona.orElseThrow());
+
+
+            return profesorRepository.save(profe).profesorOutputDto();
         //}
     }
 
@@ -79,7 +96,7 @@ public class ProfesorServiceImpl implements ProfesorService {
 
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
         if (profesorRepository.findAll(pageRequest).getContent().stream().map(Profesor::profesorOutputDto).toList().size() == 0) {
-            throw new EntityNotFoundException("No se ha encontrado a ninguna persona", 404);
+            throw new EntityNotFoundException("No se ha encontrado a ningun profesor", 404);
         } else {
             return profesorRepository.findAll(pageRequest).getContent().stream().map(Profesor::profesorOutputDto).toList();
         }
@@ -101,5 +118,6 @@ public class ProfesorServiceImpl implements ProfesorService {
         updatedProfesor.setId_profesor(id);
         return profesorRepository.save(updatedProfesor).profesorOutputDto();
     }
+
 
 }

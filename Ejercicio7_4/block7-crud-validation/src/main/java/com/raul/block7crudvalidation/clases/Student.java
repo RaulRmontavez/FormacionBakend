@@ -20,7 +20,7 @@ public class Student   {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id_student;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_persona",nullable = false,unique = true)
     Persona persona;
     @Column(name = "horas_por_semana")

@@ -9,4 +9,5 @@ public interface PersonaRepository extends JpaRepository<Persona,Integer> {
     List<Persona> findByName(String name);
     List<Persona> findAll();
 
+
 }

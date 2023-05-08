@@ -30,6 +30,8 @@ public class Persona {
     String company_email;
     @Column(name = "ciudad",nullable = false)
     String city;
+    @Column (name = "puesto")
+    String puesto = "";
     @Column(name = "activo",nullable = false)
     boolean active;
     @Column(name = "fecha de creacion",nullable = false)

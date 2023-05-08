@@ -16,7 +16,7 @@ import java.util.List;
 public class ProfesorOutputDto {
     private Integer id_profesor;
 
-    private Persona persona;
+    private PersonaOutputDto persona;
 
     private String coments;
 

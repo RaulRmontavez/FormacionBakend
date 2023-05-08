@@ -26,8 +26,12 @@ public class Profesor   {
     @Column(name = "comentarios")
     String coments;
 
-    @Column(name = "rama",nullable = false)
+    @Column(name = "rama",nullable = true)
     String branch;
+
+    @JoinColumn(name = "id_student")
+    @ManyToOne
+    Student student;
 
     public Profesor(int id_profesor) {
         this.id_profesor = id_profesor;
@@ -36,14 +40,18 @@ public class Profesor   {
     public Profesor(ProfesorInputDto profesor) {
 
         id_profesor = profesor.getId_profesor();
-
+        coments = profesor.getComents();
+        branch = profesor.getBranch();
     }
 
     public ProfesorOutputDto profesorOutputDto() {
-        return new ProfesorOutputDto(this.id_profesor, this.persona, this.coments, this.branch);
+       PersonaOutputDto person = this.persona.personaToPersonaOutputDto();
+
+        return new ProfesorOutputDto(this.id_profesor, person, this.coments, this.branch);
     }
 
     public ProfesorOutputDto profesorOutputDtoSimple() {
-        return new ProfesorOutputDto(this.id_profesor, this.persona, this.coments, this.branch);
+        PersonaOutputDto person = this.persona.personaToPersonaOutputDto();
+        return new ProfesorOutputDto(this.id_profesor, person, this.coments, this.branch);
     }
 }
