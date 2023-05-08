@@ -164,14 +164,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/persona/id/1",
+							"raw": "http://localhost:8080/profesor/id/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"persona",
+								"profesor",
 								"id",
 								"1"
 							]
