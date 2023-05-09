@@ -12,7 +12,6 @@ import java.util.List;
 @Data
 public class ProfesorInputDto {
 
-    private Integer id_profesor;
 
     private int persona;
 

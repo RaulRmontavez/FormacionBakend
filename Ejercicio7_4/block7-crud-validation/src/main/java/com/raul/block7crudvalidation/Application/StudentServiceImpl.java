@@ -1,12 +1,14 @@
 package com.raul.block7crudvalidation.Application;
 
 
+import com.raul.block7crudvalidation.clases.Alumnos_Estudios;
 import com.raul.block7crudvalidation.clases.Persona;
 import com.raul.block7crudvalidation.clases.Profesor;
 import com.raul.block7crudvalidation.clases.Student;
 import com.raul.block7crudvalidation.controller.dto.*;
 import com.raul.block7crudvalidation.exceptions.EntityNotFoundException;
 import com.raul.block7crudvalidation.exceptions.UnprocessableEntityException;
+import com.raul.block7crudvalidation.repository.AlumnosEstudiosRepository;
 import com.raul.block7crudvalidation.repository.PersonaRepository;
 import com.raul.block7crudvalidation.repository.ProfesorRepository;
 import com.raul.block7crudvalidation.repository.StudentRepository;
@@ -32,36 +34,74 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     ProfesorRepository profesorRepository;
 
+    @Autowired
+    AlumnosEstudiosRepository alumnosEstudiosRepository;
+
     @Override
-    public StudentOutputDto addStudent(StudentInputDto student) throws Exception {
+    public StudentOutputDto addStudent(StudentInputDto studentDto) throws Exception {
 
-        Optional<Persona> id_persona = personaRepository.findById(student.getPersona());
-        Persona persona = id_persona.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+        Persona id_persona = personaRepository.findById(studentDto.getPersona()).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
 
 
-        Student student1 = new Student(student);
-        if (id_persona.get().getPuesto().equals("Estudiante")) {
+        Student student1 = new Student(studentDto);
+        if (id_persona.getPuesto().equals("Estudiante")) {
             throw new UnprocessableEntityException("Esta persona ya es un estudiante");
-        } else if (id_persona.get().getPuesto().equals("Profesor")) {
+        } else if (id_persona.getPuesto().equals("Profesor")) {
             throw new UnprocessableEntityException("Esta persona ya es un profesor");
         }
-        id_persona.orElseThrow().setPuesto("Estudiante");
-        student1.setPersona(id_persona.orElseThrow());
+        id_persona.setPuesto("Estudiante");
+        student1.setPersona(id_persona);
         student1.setProfesor(null);
 
-        if (student.getProfesor() != null) {
-            Optional<Profesor> id_profesor = profesorRepository.findById(student.getProfesor());
+        if (studentDto.getProfesor() != null) {
+            Optional<Profesor> id_profesor = profesorRepository.findById(studentDto.getProfesor());
 
             if (id_profesor.get().getId_profesor() != null) {
                 student1.setProfesor(id_profesor.orElseThrow());
-                profesorService.getStudentByIdProfe(student.getProfesor());
+                profesorService.getStudentByIdProfe(studentDto.getProfesor());
             }
         }
 
         return studentRepository.save(student1).StudentOutputDto();
 
+
     }
-    
+
+
+    @Override
+    public StudentOutputDto addAsignatura(int id_asignatura, int id_student) throws Exception {
+
+        Student student = studentRepository.findById(id_student).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+        Alumnos_Estudios alumnosEstudios = alumnosEstudiosRepository.findById(id_asignatura).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna asignatura por ese id", 404));
+
+
+        if (student.getEstudios().contains(alumnosEstudios)) {
+            throw new UnprocessableEntityException("Este estudiante ya tiene esta asignatura");
+        }
+        student.getEstudios().add(alumnosEstudios);
+        return studentRepository.save(student).StudentOutputDto();
+    }
+
+
+    @Override
+    public StudentOutputDto addAsignaturas(List<Integer> id_asignatura, int id_student) throws Exception {
+
+        Student student = studentRepository.findById(id_student).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+
+        Alumnos_Estudios asig = null;
+        for (int alum : id_asignatura) {
+            asig = alumnosEstudiosRepository.findById(alum).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna asignatura por ese id", 404));
+            if (student.getEstudios().contains(asig.getId_study())){
+                System.out.println("Asignatura duplicada no añadida");
+            }
+            else{
+                student.getEstudios().add(asig);
+            }
+        }
+
+        return studentRepository.save(student).StudentOutputDto();
+    }
+
 
     @Override
     public StudentOutputDto getStudentById(int id) {

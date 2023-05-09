@@ -15,7 +15,6 @@ import java.util.List;
 @Setter
 public class Alumnos_EstudiosInputDto {
 
-    private Integer id_study;
     private Profesor profesor;
     private List<Student> student;
     private String asignatura;

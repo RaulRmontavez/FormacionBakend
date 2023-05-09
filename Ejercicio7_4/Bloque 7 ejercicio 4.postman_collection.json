@@ -258,6 +258,138 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Alumnos estudios",
+			"item": [
+				{
+					"name": "Ejercicio4 Mostrar por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/profesor/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profesor",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Asignaturas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"persona\":\"1\",\r\n    \"num_hours_week\":\"25\",\r\n    \"coments\": \"Hola\",\r\n    \"branch\": \"Nulo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/profesor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profesor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar asignaturas a estudiantes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/asignaturas/studentAsignatura?id_asignatura=1&id_estudiante=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"studentAsignatura"
+							],
+							"query": [
+								{
+									"key": "id_asignatura",
+									"value": "1"
+								},
+								{
+									"key": "id_estudiante",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar muchas asignaturas a estudiantes Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/asignaturas/studentAsignatura?id_asignatura=1&id_estudiante=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"asignaturas",
+								"studentAsignatura"
+							],
+							"query": [
+								{
+									"key": "id_asignatura",
+									"value": "1"
+								},
+								{
+									"key": "id_estudiante",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

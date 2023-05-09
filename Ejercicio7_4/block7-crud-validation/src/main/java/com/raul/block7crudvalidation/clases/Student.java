@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.nio.MappedByteBuffer;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,6 @@ public class Student   {
 
     public Student(StudentInputDto student) {
 
-        id_student = student.getId_student();
         persona = null;
         num_hours_week = student.getNum_hours_week();
         coments = student.getComents();

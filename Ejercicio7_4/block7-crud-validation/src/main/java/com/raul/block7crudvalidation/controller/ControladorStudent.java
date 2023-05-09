@@ -1,18 +1,13 @@
 package com.raul.block7crudvalidation.controller;
 
-import com.raul.block7crudvalidation.Application.PersonaService;
 import com.raul.block7crudvalidation.Application.StudentService;
-import com.raul.block7crudvalidation.controller.dto.PersonaInputDto;
-import com.raul.block7crudvalidation.controller.dto.PersonaOutputDto;
-import com.raul.block7crudvalidation.controller.dto.StudentInputDto;
-import com.raul.block7crudvalidation.controller.dto.StudentOutputDto;
+import com.raul.block7crudvalidation.controller.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/student")
@@ -59,6 +54,18 @@ public class ControladorStudent {
         return studentService.getAllPersonas(pageNumber,pageSize);
         }*/
 
+
+    //Agregar una asignatura a un estudiante
+    @PostMapping("/studentAsignatura")
+    public ResponseEntity<StudentOutputDto> addAsignatura(@RequestParam int id_asignatura, @RequestParam int id_estudiante) throws Exception {
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addAsignatura(id_asignatura,id_estudiante));
+    }
+
+    //Agregar muchas asignaturas a un estudiante
+    @PostMapping("/studentAsignatura/{id_estudiante}")
+    public ResponseEntity<StudentOutputDto> addAsignaturas(@PathVariable int id_estudiante,@RequestBody List<Integer> id_asignaturas) throws Exception {
+        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.addAsignaturas(id_asignaturas,id_estudiante));
+    }
 
     //Agregar un estudiante
     @PostMapping

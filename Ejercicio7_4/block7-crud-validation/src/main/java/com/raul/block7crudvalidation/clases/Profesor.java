@@ -19,7 +19,7 @@ public class Profesor   {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id_profesor;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_persona")
     Persona persona;
 
@@ -29,8 +29,8 @@ public class Profesor   {
     @Column(name = "rama",nullable = false)
     String branch;
 
-    @JoinColumn(name = "id_student")
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @OneToMany(mappedBy = "profesor", fetch = FetchType.LAZY)
     List<Student> student;
 
     public Profesor(int id_profesor) {
@@ -39,7 +39,6 @@ public class Profesor   {
 
     public Profesor(ProfesorInputDto profesor) {
 
-        id_profesor = profesor.getId_profesor();
         coments = profesor.getComents();
         branch = profesor.getBranch();
     }
