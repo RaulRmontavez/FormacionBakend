@@ -3,6 +3,7 @@ package com.raul.block7crudvalidation.Application;
 
 import com.raul.block7crudvalidation.clases.Persona;
 import com.raul.block7crudvalidation.clases.Profesor;
+import com.raul.block7crudvalidation.clases.Student;
 import com.raul.block7crudvalidation.controller.dto.PersonaInputDto;
 import com.raul.block7crudvalidation.controller.dto.PersonaOutputDto;
 import com.raul.block7crudvalidation.controller.dto.ProfesorInputDto;
@@ -16,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,32 +28,12 @@ public class ProfesorServiceImpl implements ProfesorService {
     @Autowired
     PersonaRepository personaRepository;
 
+    @Autowired
+    StudentRepository studentRepository;
+
 
     @Override
     public ProfesorOutputDto addProfesor(ProfesorInputDto profesor) throws Exception {
-       /* if (Objects.isNull(profesor.getUsuario()) || profesor.getUsuario().isBlank()) {
-            throw new UnprocessableEntityException("El usuario no puede estar vacio");
-        } else if (persona.getUsuario().length() > 10) {
-            throw new UnprocessableEntityException("Longitud de usuario no puede ser superior a 10 caracteres");
-        } else if (Objects.isNull(persona.getPassword())) {
-            throw new UnprocessableEntityException("La contraseña no puede estar vacio");
-        } else if (Objects.isNull(persona.getName())) {
-            throw new UnprocessableEntityException("El nombre no puede estar vacio");
-        } else if (Objects.isNull(persona.getSurname())) {
-            throw new UnprocessableEntityException("El surname no puede estar vacio");
-        } else if (Objects.isNull(persona.getCompany_email())) {
-            throw new UnprocessableEntityException("La compañia de email no puede estar vacia");
-        } else if (Objects.isNull(persona.getCity())) {
-            throw new UnprocessableEntityException("La ciudad no puede estar vacia");
-        } else if (Objects.isNull(persona.isActive())) {
-            throw new UnprocessableEntityException("El activo no puede estar vacio");
-        } else if (Objects.isNull(persona.getCreated_date())) {
-            throw new UnprocessableEntityException("La fecha de creacion no puede estar vacia");
-        } else if (Objects.isNull(persona.getImagen_url())) {
-            throw new UnprocessableEntityException("La url de imagen no puede estar vacio");
-        } else if (Objects.isNull(persona.getTermination_date())) {
-            throw new UnprocessableEntityException("La fecha de finalizacion no puede estar vacio");
-        } else {*/
         Optional<Persona> persona = personaRepository.findById(profesor.getPersona());
         Persona persona1 = persona.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
 
@@ -79,6 +57,25 @@ public class ProfesorServiceImpl implements ProfesorService {
         Profesor profesor = personaOptional.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
         ProfesorOutputDto profesorOutputDto = profesor.profesorOutputDto();
         return profesorOutputDto;
+    }
+
+    @Override
+    public List<Student> getStudentByIdProfe(int id) {
+
+        Profesor profe = profesorRepository.findById(id).get();
+        profe.getStudent().clear();
+        List<Student> estudiant = studentRepository.findAll();
+        for (Student estud: estudiant){
+            if (estud.getProfesor().getId_profesor() == id){
+                profe.getStudent().add(estud);
+            }
+        }
+
+        if (profe.getStudent().size() != 0) {
+            return profe.getStudent();
+        }
+
+        throw new EntityNotFoundException("No se han encontrado estudiantes con esa id de profesor",422);
     }
 
    /* @Override

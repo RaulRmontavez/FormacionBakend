@@ -16,7 +16,7 @@ public class StudentInputDto {
     private Integer persona;
     private Integer num_hours_week;
     private String coments;
-    private Profesor profesor;
+    private Integer profesor;
     private String branch;
     private List<Alumnos_Estudios> estudios;
 }

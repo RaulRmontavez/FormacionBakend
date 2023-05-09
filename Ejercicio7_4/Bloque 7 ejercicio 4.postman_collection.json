@@ -152,6 +152,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Ejercicio4 Modificar estudiante",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"persona\":\"1\",\r\n    \"num_hours_week\":\"25\",\r\n    \"coments\": \"Hola\",\r\n    \"branch\": \"Nulo\",\r\n    \"profesor\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -160,6 +189,27 @@
 			"item": [
 				{
 					"name": "Ejercicio4 Mostrar por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/profesor/id/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profesor",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ejercicio4 Mostrar student por Id de profesor",
 					"request": {
 						"method": "GET",
 						"header": [],

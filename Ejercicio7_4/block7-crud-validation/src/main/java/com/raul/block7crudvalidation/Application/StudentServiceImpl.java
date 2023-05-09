@@ -26,31 +26,14 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     PersonaRepository personaRepository;
 
+    @Autowired
+    ProfesorService profesorService;
+
+    @Autowired
+    ProfesorRepository profesorRepository;
+
     @Override
     public StudentOutputDto addStudent(StudentInputDto student) throws Exception {
-       /* if (Objects.isNull(profesor.getUsuario()) || profesor.getUsuario().isBlank()) {
-            throw new UnprocessableEntityException("El usuario no puede estar vacio");
-        } else if (persona.getUsuario().length() > 10) {
-            throw new UnprocessableEntityException("Longitud de usuario no puede ser superior a 10 caracteres");
-        } else if (Objects.isNull(persona.getPassword())) {
-            throw new UnprocessableEntityException("La contraseña no puede estar vacio");
-        } else if (Objects.isNull(persona.getName())) {
-            throw new UnprocessableEntityException("El nombre no puede estar vacio");
-        } else if (Objects.isNull(persona.getSurname())) {
-            throw new UnprocessableEntityException("El surname no puede estar vacio");
-        } else if (Objects.isNull(persona.getCompany_email())) {
-            throw new UnprocessableEntityException("La compañia de email no puede estar vacia");
-        } else if (Objects.isNull(persona.getCity())) {
-            throw new UnprocessableEntityException("La ciudad no puede estar vacia");
-        } else if (Objects.isNull(persona.isActive())) {
-            throw new UnprocessableEntityException("El activo no puede estar vacio");
-        } else if (Objects.isNull(persona.getCreated_date())) {
-            throw new UnprocessableEntityException("La fecha de creacion no puede estar vacia");
-        } else if (Objects.isNull(persona.getImagen_url())) {
-            throw new UnprocessableEntityException("La url de imagen no puede estar vacio");
-        } else if (Objects.isNull(persona.getTermination_date())) {
-            throw new UnprocessableEntityException("La fecha de finalizacion no puede estar vacio");
-        } else {*/
 
         Optional<Persona> id_persona = personaRepository.findById(student.getPersona());
         Persona persona = id_persona.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
@@ -64,12 +47,21 @@ public class StudentServiceImpl implements StudentService {
         }
         id_persona.orElseThrow().setPuesto("Estudiante");
         student1.setPersona(id_persona.orElseThrow());
+        student1.setProfesor(null);
 
+        if (student.getProfesor() != null) {
+            Optional<Profesor> id_profesor = profesorRepository.findById(student.getProfesor());
+
+            if (id_profesor.get().getId_profesor() != null) {
+                student1.setProfesor(id_profesor.orElseThrow());
+                profesorService.getStudentByIdProfe(student.getProfesor());
+            }
+        }
 
         return studentRepository.save(student1).StudentOutputDto();
 
-        //}
     }
+    
 
     @Override
     public StudentOutputDto getStudentById(int id) {
@@ -117,11 +109,26 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentOutputDto updateStudent(StudentInputDto student, int id) {
         Optional<Student> existingStudent = studentRepository.findById(id);
+
+        Optional<Persona> id_persona = personaRepository.findById(student.getPersona());
+        Persona persona = id_persona.orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+
+        Optional<Profesor> id_profesor = profesorRepository.findById(student.getProfesor());
+
         if (existingStudent == null) {
-            throw new NoSuchElementException("Persona not found with id: " + id);
+            throw new NoSuchElementException("Estudiante not found with id: " + id);
         }
         Student updatedStudent = new Student(student);
-        updatedStudent.setId_student(id);
+        id_persona.orElseThrow().setPuesto("Estudiante");
+        updatedStudent.setPersona(id_persona.orElseThrow());
+        updatedStudent.setProfesor(id_profesor.orElseThrow());
+
+        updatedStudent.setStudent(updatedStudent);
+
+        if (updatedStudent.getProfesor() != null) {
+            profesorService.getStudentByIdProfe(student.getProfesor());
+        }
+
         return studentRepository.save(updatedStudent).StudentOutputDto();
     }
 

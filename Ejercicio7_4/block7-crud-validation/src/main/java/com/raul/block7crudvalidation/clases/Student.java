@@ -27,8 +27,8 @@ public class Student   {
     Integer num_hours_week;
     @Column(name = "comentarios")
     String coments;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_profesor")
+    @ManyToOne
+    @JoinColumn(name = "id_profesor",nullable = true)
     Profesor profesor;
     @Column(name = "rama")
     String branch;
@@ -48,13 +48,22 @@ public class Student   {
     }
 
 
+    public void setStudent(Student student){
+        id_student = student.getId_student();
+        persona = student.getPersona();
+        num_hours_week = student.getNum_hours_week();
+        coments = student.getComents();
+        profesor = student.getProfesor();
+        branch = student.getBranch();
+    }
+
 
     public StudentOutputDto StudentOutputDto() {
         return new StudentOutputDto(this.id_student,this.num_hours_week,this.coments,this.profesor,this.branch,this.estudios,this.persona.getId_persona(),this.persona.getUsuario(),this.persona.getPassword(),this.persona.getName(),this.persona.getSurname(),this.persona.getCompany_email(),this.persona.getCity(),this.persona.isActive(),this.persona.getCreated_date(),this.persona.getImagen_url(),this.persona.getTermination_date());
     }
 
     public StudentOutputDtoSimple StudentOutputDtoSimple() {
-        return new StudentOutputDtoSimple(this.id_student,this.persona.getId_persona(),this.num_hours_week,this.coments,this.profesor,this.branch,this.estudios);
+        return new StudentOutputDtoSimple(this.id_student,this.persona.getId_persona(),this.num_hours_week,this.coments,this.profesor.getId_profesor(),this.branch,this.estudios);
     }
 
 }

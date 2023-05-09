@@ -26,12 +26,12 @@ public class Profesor   {
     @Column(name = "comentarios")
     String coments;
 
-    @Column(name = "rama",nullable = true)
+    @Column(name = "rama",nullable = false)
     String branch;
 
     @JoinColumn(name = "id_student")
-    @ManyToOne
-    Student student;
+    @OneToMany(fetch = FetchType.LAZY)
+    List<Student> student;
 
     public Profesor(int id_profesor) {
         this.id_profesor = id_profesor;
@@ -44,14 +44,16 @@ public class Profesor   {
         branch = profesor.getBranch();
     }
 
+
     public ProfesorOutputDto profesorOutputDto() {
        PersonaOutputDto person = this.persona.personaToPersonaOutputDto();
-
-        return new ProfesorOutputDto(this.id_profesor, person, this.coments, this.branch);
+        List<StudentOutputDtoSimple> Student = new ArrayList<>();
+        student.addAll(this.student);
+        return new ProfesorOutputDto(this.id_profesor, person, this.coments, this.branch,Student);
     }
 
-    public ProfesorOutputDto profesorOutputDtoSimple() {
+    /*public ProfesorOutputDto profesorOutputDtoSimple() {
         PersonaOutputDto person = this.persona.personaToPersonaOutputDto();
         return new ProfesorOutputDto(this.id_profesor, person, this.coments, this.branch);
-    }
+    }*/
 }

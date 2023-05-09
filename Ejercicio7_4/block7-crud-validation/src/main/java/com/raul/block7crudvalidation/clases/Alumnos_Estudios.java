@@ -15,11 +15,10 @@ public class Alumnos_Estudios {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id_study;
-
     @ManyToOne
     @JoinColumn(name = "profesor_id")
     Profesor profesor;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     List<Student> student;
     @Column(name = "asignatura")
     String asignatura;

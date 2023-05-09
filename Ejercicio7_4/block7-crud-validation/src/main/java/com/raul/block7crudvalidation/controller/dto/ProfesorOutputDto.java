@@ -22,5 +22,7 @@ public class ProfesorOutputDto {
 
     private String branch;
 
+    private List<StudentOutputDtoSimple> student;
+
 
 }

@@ -22,26 +22,37 @@ public class ControladorProfesor {
     @GetMapping("id/{id}")
     public ResponseEntity<Object> getProfesorById(@PathVariable int id, @RequestParam String outputType) {
 
-        if (outputType.equals("full")){
+        if (outputType.equals("full")) {
             try {
                 return ResponseEntity.ok().body(profesorService.getProfesorById(id));
             } catch (Exception e) {
                 return ResponseEntity.notFound().build();
             }
 
-        }
-        else if (outputType.equals("simple")){
+        } else if (outputType.equals("simple")) {
             try {
                 return ResponseEntity.ok().body(profesorService.getProfesorById(id));
             } catch (Exception e) {
                 return ResponseEntity.notFound().build();
             }
-        }
-        else{
+        } else {
             return ResponseEntity.badRequest().build();
         }
 
     }
+
+
+    @GetMapping("id/student/{id}")
+    public ResponseEntity<Object> getStudentsForProfe(@PathVariable int id) {
+
+        try {
+            return ResponseEntity.ok().body(profesorService.getStudentByIdProfe(id));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
 
    /* @GetMapping("name/{name}")
     public List<PersonaOutputDto> getPersonaByNombre(@PathVariable String name) {
@@ -68,19 +79,20 @@ public class ControladorProfesor {
     public ResponseEntity<String> deleteProfesorById(@PathVariable int id) {
         try {
             profesorService.deleteProfesorById(id);
-            return ResponseEntity.ok().body("Profesor with id: "+id+" was deleted");
+            return ResponseEntity.ok().body("Profesor with id: " + id + " was deleted");
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
 
         }
     }
+
     //Modificar un profesor
     @PutMapping("/{id}")
     public ResponseEntity<ProfesorOutputDto> updateProfesor(@RequestBody ProfesorInputDto profesor, @PathVariable int id) {
         try {
             profesorService.getProfesorById(id);
-            profesorService.updateProfesor(profesor,id);
-            return  ResponseEntity.ok().body(profesorService.getProfesorById(id));
+            profesorService.updateProfesor(profesor, id);
+            return ResponseEntity.ok().body(profesorService.getProfesorById(id));
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
