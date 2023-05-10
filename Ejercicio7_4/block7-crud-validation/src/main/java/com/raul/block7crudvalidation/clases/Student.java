@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.nio.MappedByteBuffer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class Student   {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id_student;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_persona",nullable = false,unique = true)
     Persona persona;
     @Column(name = "horas_por_semana")
@@ -59,11 +60,18 @@ public class Student   {
 
 
     public StudentOutputDto StudentOutputDto() {
-        return new StudentOutputDto(this.id_student,this.num_hours_week,this.coments,this.profesor,this.branch,this.estudios,this.persona.getId_persona(),this.persona.getUsuario(),this.persona.getPassword(),this.persona.getName(),this.persona.getSurname(),this.persona.getCompany_email(),this.persona.getCity(),this.persona.isActive(),this.persona.getCreated_date(),this.persona.getImagen_url(),this.persona.getTermination_date());
+        List<Alumnos_EstudiosOutputDtoSimple> alumnos = new ArrayList<>();
+        if (estudios != null) {
+            for (Alumnos_Estudios asignaturas : estudios) {
+                alumnos.add(asignaturas.Alumnos_EstudiosOutputDtoSimple());
+            }
+        }
+
+        return new StudentOutputDto(this.id_student,this.num_hours_week,this.coments,this.profesor,this.branch,alumnos,this.persona.getId_persona(),this.persona.getUsuario(),this.persona.getPassword(),this.persona.getName(),this.persona.getSurname(),this.persona.getCompany_email(),this.persona.getCity(),this.persona.isActive(),this.persona.getCreated_date(),this.persona.getImagen_url(),this.persona.getTermination_date());
     }
 
     public StudentOutputDtoSimple StudentOutputDtoSimple() {
-        return new StudentOutputDtoSimple(this.id_student,this.persona.getId_persona(),this.num_hours_week,this.coments,this.profesor.getId_profesor(),this.branch,this.estudios);
+        return new StudentOutputDtoSimple(this.id_student,this.persona.getId_persona(),this.num_hours_week,this.coments,this.profesor.getId_profesor(),this.branch);
     }
 
 }

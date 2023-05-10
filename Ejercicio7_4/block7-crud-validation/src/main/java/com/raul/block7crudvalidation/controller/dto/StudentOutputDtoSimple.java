@@ -20,7 +20,7 @@ public class StudentOutputDtoSimple {
     private String coments;
     private int profesor;
     private String branch;
-    private List<Alumnos_Estudios> estudios;
+
 
 
 

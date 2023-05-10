@@ -78,7 +78,9 @@ public class StudentServiceImpl implements StudentService {
         if (student.getEstudios().contains(alumnosEstudios)) {
             throw new UnprocessableEntityException("Este estudiante ya tiene esta asignatura");
         }
+        alumnosEstudios.getStudent().add(student);
         student.getEstudios().add(alumnosEstudios);
+        alumnosEstudiosRepository.save(alumnosEstudios);
         return studentRepository.save(student).StudentOutputDto();
     }
 
@@ -95,10 +97,12 @@ public class StudentServiceImpl implements StudentService {
                 System.out.println("Asignatura duplicada no añadida");
             }
             else{
+                asig.getStudent().add(student);
                 student.getEstudios().add(asig);
+
             }
         }
-
+        alumnosEstudiosRepository.save(asig);
         return studentRepository.save(student).StudentOutputDto();
     }
 
@@ -142,7 +146,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteStudentById(int id) {
-        studentRepository.findById(id).orElseThrow();
+        Student student = studentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ningun estudiante por ese id", 404));
+        Persona id_persona = personaRepository.findById(student.getPersona().getId_persona()).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+        id_persona.setPuesto("");
+
+        personaRepository.save(id_persona);
         studentRepository.deleteById(id);
     }
 

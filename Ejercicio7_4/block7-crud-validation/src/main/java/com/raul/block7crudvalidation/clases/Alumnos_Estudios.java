@@ -1,15 +1,13 @@
 package com.raul.block7crudvalidation.clases;
 
-import com.raul.block7crudvalidation.controller.dto.Alumnos_EstudiosInputDto;
-import com.raul.block7crudvalidation.controller.dto.Alumnos_EstudiosOutputDto;
-import com.raul.block7crudvalidation.controller.dto.PersonaInputDto;
-import com.raul.block7crudvalidation.controller.dto.PersonaOutputDto;
+import com.raul.block7crudvalidation.controller.dto.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class Alumnos_Estudios {
     @ManyToOne
     @JoinColumn(name = "profesor_id")
     Profesor profesor;
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     List<Student> student;
     @Column(name = "asignatura")
     String asignatura;
@@ -57,8 +55,19 @@ public class Alumnos_Estudios {
 
     //Convertir input a output
     public Alumnos_EstudiosOutputDto asignaturaToAlumnoOutputDto() {
-        return new Alumnos_EstudiosOutputDto(this.id_study,this.profesor,this.student,this.asignatura,this.comment,this.initial_date,this.finish_date);
+        List<StudentOutputDtoSimple> students = new ArrayList<>();
+        if (student != null) {
+            for (Student estudiante : student) {
+                students.add(estudiante.StudentOutputDtoSimple());
+            }
+        }
+
+        return new Alumnos_EstudiosOutputDto(this.id_study,this.profesor,students,this.asignatura,this.comment,this.initial_date,this.finish_date);
     }
 
+
+    public Alumnos_EstudiosOutputDtoSimple Alumnos_EstudiosOutputDtoSimple() {
+        return new Alumnos_EstudiosOutputDtoSimple(this.id_study,this.asignatura,this.comment,this.initial_date,this.finish_date);
+    }
 }
 

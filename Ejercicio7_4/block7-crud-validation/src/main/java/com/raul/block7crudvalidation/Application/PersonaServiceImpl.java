@@ -2,12 +2,14 @@ package com.raul.block7crudvalidation.Application;
 
 
 import com.raul.block7crudvalidation.clases.Persona;
+import com.raul.block7crudvalidation.clases.Student;
 import com.raul.block7crudvalidation.controller.dto.PersonaInputDto;
 import com.raul.block7crudvalidation.controller.dto.PersonaOutputDto;
 import com.raul.block7crudvalidation.exceptions.CustomError;
 import com.raul.block7crudvalidation.exceptions.EntityNotFoundException;
 import com.raul.block7crudvalidation.exceptions.UnprocessableEntityException;
 import com.raul.block7crudvalidation.repository.PersonaRepository;
+import com.raul.block7crudvalidation.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,11 @@ import java.util.stream.Collectors;
 public class PersonaServiceImpl implements PersonaService {
     @Autowired
     PersonaRepository personaRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
+    @Autowired
+    StudentService studentService;
 
 
     @Override
@@ -84,9 +91,18 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     public void deletePersonaById(int id) {
-        personaRepository.findById(id).orElseThrow();
-        personaRepository.deleteById(id);
-    }
+       Persona persona = personaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+       if (persona.getPuesto().equals("Profesor")) {
+           throw new EntityNotFoundException("Esta persona esta asignada a un profesor", 404);
+       }
+       else if (persona.getPuesto().equals("Profesor")){
+           throw new EntityNotFoundException("No se ha encontrado a ninguna persona", 404);
+       }
+       else{
+            personaRepository.deleteById(id);
+        }
+       }
+
 
     @Override
     public PersonaOutputDto updatePersona(PersonaInputDto persona,int id) {

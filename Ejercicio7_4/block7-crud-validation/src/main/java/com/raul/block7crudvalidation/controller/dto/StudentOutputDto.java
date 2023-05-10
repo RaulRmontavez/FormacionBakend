@@ -20,7 +20,7 @@ public class StudentOutputDto {
     private String coments;
     private Profesor profesor;
     private String branch;
-    private List<Alumnos_Estudios> estudios;
+    private List<Alumnos_EstudiosOutputDtoSimple> estudios;
 
     //Persona
     private int id_persona;

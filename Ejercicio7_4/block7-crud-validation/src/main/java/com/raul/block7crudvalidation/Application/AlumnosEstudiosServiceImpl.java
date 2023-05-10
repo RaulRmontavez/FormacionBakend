@@ -34,7 +34,6 @@ public class AlumnosEstudiosServiceImpl implements Alumnos_EstudiosService {
     }
 
 
-
     @Override
     public Alumnos_EstudiosOutputDto getAlumnos_EstudiosById(int id) {
         Optional<Alumnos_Estudios> AlumnosOptional = alumnosEstudiosRepository.findById(id);
@@ -51,16 +50,30 @@ public class AlumnosEstudiosServiceImpl implements Alumnos_EstudiosService {
 
     @Override
     public Iterable<Alumnos_EstudiosOutputDto> getAllAlumnos_Estudios(int pageNumber, int pageSize) {
-        return null;
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+        if (alumnosEstudiosRepository.findAll(pageRequest).getContent().stream().map(Alumnos_Estudios::asignaturaToAlumnoOutputDto).toList().size() == 0) {
+            throw new EntityNotFoundException("No se ha encontrado a ninguna asignatura", 404);
+        } else {
+            return alumnosEstudiosRepository.findAll(pageRequest).getContent().stream().map(Alumnos_Estudios::asignaturaToAlumnoOutputDto).toList();
+        }
+
     }
 
     @Override
     public Alumnos_EstudiosOutputDto updateAlumnos_Estudios(Alumnos_EstudiosInputDto alumnosEstudiosInputDto, int id) {
-        return null;
+        Optional<Alumnos_Estudios> existingAlumnosEstudios = alumnosEstudiosRepository.findById(id);
+        if (existingAlumnosEstudios == null) {
+            throw new NoSuchElementException("Asignatura not found with id: " + id);
+        }
+        Alumnos_Estudios updatedAsignatura = new Alumnos_Estudios(alumnosEstudiosInputDto);
+        updatedAsignatura.setId_study(id);
+        return alumnosEstudiosRepository.save(updatedAsignatura).asignaturaToAlumnoOutputDto();
     }
 
     @Override
     public void deleteAlumnos_EstudiosById(int id) {
+        Alumnos_Estudios alumnosEstudios = alumnosEstudiosRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado a ninguna persona por ese id", 404));
+        alumnosEstudiosRepository.deleteById(id);
 
     }
 }
