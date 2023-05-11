@@ -20,24 +20,13 @@ public class ControladorProfesor {
 
     //Obtener los profesores
     @GetMapping("id/{id}")
-    public ResponseEntity<Object> getProfesorById(@PathVariable int id, @RequestParam String outputType) {
+    public ResponseEntity<Object> getProfesorById(@PathVariable int id) {
 
-        if (outputType.equals("full")) {
             try {
                 return ResponseEntity.ok().body(profesorService.getProfesorById(id));
             } catch (Exception e) {
                 return ResponseEntity.notFound().build();
             }
-
-        } else if (outputType.equals("simple")) {
-            try {
-                return ResponseEntity.ok().body(profesorService.getProfesorById(id));
-            } catch (Exception e) {
-                return ResponseEntity.notFound().build();
-            }
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
 
     }
 

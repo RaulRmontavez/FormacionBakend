@@ -60,6 +60,21 @@ public class ProfesorServiceImpl implements ProfesorService {
     }
 
     @Override
+    public Profesor getProfesorByIdPersona(int id) {
+
+
+        List<Profesor> profesorOptional = profesorRepository.findAll();
+        for (Profesor profesor: profesorOptional) {
+            if (profesor.getPersona().getId_persona() == id){
+                return profesor;
+            }
+        }
+        throw new EntityNotFoundException("No se ha encontrado a ningun profesor por ese id de persona", 404);
+
+
+    }
+
+    @Override
     public List<Student> getStudentByIdProfe(int id) {
 
         Profesor profe = profesorRepository.findById(id).get();

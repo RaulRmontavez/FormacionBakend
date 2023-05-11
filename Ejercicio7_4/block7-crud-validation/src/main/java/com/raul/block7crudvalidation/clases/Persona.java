@@ -62,6 +62,22 @@ public class Persona {
 
     }
 
+    public Persona(PersonaOutputDto persona) {
+
+        usuario = persona.getUsuario();
+        password = persona.getPassword();
+        name = persona.getName();
+        surname = persona.getSurname();
+        company_email = persona.getCompany_email();
+        city = persona.getCity();
+        active = persona.isActive();
+        created_date = persona.getCreated_date();
+        imagen_url = persona.getImagen_url();
+        termination_date = persona.getTermination_date();
+
+
+    }
+
     public PersonaOutputDto personaToPersonaOutputDto() {
         return new PersonaOutputDto(this.id_persona, this.usuario, this.password, this.name, this.surname, this.company_email, this.city, this.active,
                 this.created_date, this.imagen_url, this.termination_date);

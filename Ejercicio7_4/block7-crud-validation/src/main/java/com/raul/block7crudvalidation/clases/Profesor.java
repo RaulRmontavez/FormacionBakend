@@ -30,7 +30,7 @@ public class Profesor   {
     String branch;
 
 
-    @OneToMany(mappedBy = "profesor", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "profesor")
     List<Student> student;
 
     public Profesor(int id_profesor) {
@@ -47,7 +47,9 @@ public class Profesor   {
     public ProfesorOutputDto profesorOutputDto() {
        PersonaOutputDto person = this.persona.personaToPersonaOutputDto();
         List<StudentOutputDtoSimple> Student = new ArrayList<>();
-        student.addAll(this.student);
+        if (student != null) {
+            student.addAll(this.student);
+        }
         return new ProfesorOutputDto(this.id_profesor, person, this.coments, this.branch,Student);
     }
 

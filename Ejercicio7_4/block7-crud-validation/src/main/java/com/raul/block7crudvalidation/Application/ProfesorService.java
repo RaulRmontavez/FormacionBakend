@@ -20,6 +20,7 @@ public interface ProfesorService {
     Iterable<ProfesorOutputDto> getAllProfesor(int pageNumber, int pageSize);
     ProfesorOutputDto updateProfesor(ProfesorInputDto profesor, int id);
     void deleteProfesorById( int id);
+    Profesor getProfesorByIdPersona(int id);
 
     List<Student> getStudentByIdProfe(int id);
 
