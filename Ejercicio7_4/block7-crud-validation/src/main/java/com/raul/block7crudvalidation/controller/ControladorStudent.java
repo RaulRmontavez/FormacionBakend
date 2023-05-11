@@ -1,6 +1,7 @@
 package com.raul.block7crudvalidation.controller;
 
 import com.raul.block7crudvalidation.Application.StudentService;
+import com.raul.block7crudvalidation.clases.Student;
 import com.raul.block7crudvalidation.controller.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

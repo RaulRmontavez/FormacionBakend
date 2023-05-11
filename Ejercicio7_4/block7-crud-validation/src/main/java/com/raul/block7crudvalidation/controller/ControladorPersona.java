@@ -2,6 +2,7 @@ package com.raul.block7crudvalidation.controller;
 
 import com.raul.block7crudvalidation.Application.PersonaService;
 import com.raul.block7crudvalidation.Application.ProfesorService;
+import com.raul.block7crudvalidation.Application.ProfesorServiceImpl;
 import com.raul.block7crudvalidation.clases.Profesor;
 import com.raul.block7crudvalidation.controller.dto.PersonaInputDto;
 import com.raul.block7crudvalidation.controller.dto.PersonaOutputDto;
@@ -41,16 +42,14 @@ public class ControladorPersona {
         }
     }
 
-    @GetMapping("/profesor2/{id}")
+    @GetMapping("/profesor/{id}")
     public ResponseEntity<ProfesorOutputDto> getProfesor(@PathVariable int id) {
         try {
-            String url = "http://localhost:8081/profesor2/{id}";
-           // Profesor profesor = profesorService.getProfesorByIdPersona(id);
-
-
-            return ResponseEntity.ok().body(restTemplate.getForObject(url, ProfesorOutputDto.class, id));
-
+            String url = "http://localhost:8081/profesor/id/{id}";
+            ProfesorOutputDto profesorOutputDto = restTemplate.getForObject(url, Profesor.class, id).profesorOutputDto();
+            return ResponseEntity.ok().body(profesorOutputDto);
         } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
             return ResponseEntity.notFound().build();
         }
     }
