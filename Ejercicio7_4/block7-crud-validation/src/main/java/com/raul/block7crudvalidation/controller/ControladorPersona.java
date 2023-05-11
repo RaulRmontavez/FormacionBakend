@@ -2,12 +2,12 @@ package com.raul.block7crudvalidation.controller;
 
 import com.raul.block7crudvalidation.Application.PersonaService;
 import com.raul.block7crudvalidation.Application.ProfesorService;
-import com.raul.block7crudvalidation.Application.ProfesorServiceImpl;
-import com.raul.block7crudvalidation.clases.Profesor;
 import com.raul.block7crudvalidation.controller.dto.PersonaInputDto;
 import com.raul.block7crudvalidation.controller.dto.PersonaOutputDto;
 import com.raul.block7crudvalidation.controller.dto.ProfesorOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +23,15 @@ public class ControladorPersona {
 
     @Autowired
     ProfesorService profesorService;
+    @Autowired
 
-    private final RestTemplate restTemplate;
+    ProfesorClient profesorClient;
 
-    public ControladorPersona(RestTemplate restTemplate) {
+  //  private final RestTemplate restTemplate;
+
+  /*  public ControladorPersona(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-    }
+    }*/
 
     //Obtener las personas
     @GetMapping("id/{id}")
@@ -42,7 +45,7 @@ public class ControladorPersona {
         }
     }
 
-    @GetMapping("/profesor/{id}")
+   /* @GetMapping("/profesor/{id}")
     public ResponseEntity<ProfesorOutputDto> getProfesor(@PathVariable int id) {
         try {
             String url = "http://localhost:8081/profesor/id/{id}";
@@ -52,7 +55,14 @@ public class ControladorPersona {
             System.out.println("Error: " + e.getMessage());
             return ResponseEntity.notFound().build();
         }
+    }*/
+
+    @GetMapping("/profesor/{id}")
+    public ProfesorOutputDto getProfesor(@PathVariable int id) {
+        ProfesorOutputDto profesor = profesorClient.getProfesor(id);
+        return profesor;
     }
+
 
     @GetMapping("name/{name}")
     public List<PersonaOutputDto> getPersonaByNombre(@PathVariable String name) {

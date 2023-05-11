@@ -1,6 +1,8 @@
-package com.raul.block7crudvalidation.controller.dto;
+package com.raul.block7crudvalidation.controller;
 
 import com.raul.block7crudvalidation.Application.Alumnos_EstudiosService;
+import com.raul.block7crudvalidation.controller.dto.Alumnos_EstudiosInputDto;
+import com.raul.block7crudvalidation.controller.dto.Alumnos_EstudiosOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
