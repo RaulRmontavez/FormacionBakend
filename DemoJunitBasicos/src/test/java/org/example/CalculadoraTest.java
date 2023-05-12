@@ -1,5 +1,6 @@
 package org.example;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,6 +24,7 @@ class CalculadoraTest {
     }
 
     @Test
+    @Tag("avanzada")
     void division() {
         Calculadora calculadora = new Calculadora();
         double resultado = calculadora.division(20, 5);
@@ -30,6 +32,7 @@ class CalculadoraTest {
     }
 
     @Test
+    @Tag("avanzada")
     void multiplicacion() {
         Calculadora calculadora = new Calculadora();
         int resultado = calculadora.multiplicacion(100, 6);
