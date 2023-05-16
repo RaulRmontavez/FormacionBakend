@@ -1,0 +1,11 @@
+# Utiliza una imagen base de Java
+FROM openjdk:11-jdk-slim
+
+# Copia el archivo JAR de la aplicación en el contenedor
+COPY C:\Users\raul.rmontavez\Desktop\FormacionBackend\Docker\block7-crud-validation  app.jar
+
+# Expone el puerto en el que la aplicación se ejecuta dentro del contenedor
+EXPOSE 8080
+
+# Comando para ejecutar la aplicación cuando se inicie el contenedor
+CMD ["java", "-jar", "block7-crud-validation.jar"]
