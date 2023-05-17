@@ -2,7 +2,7 @@
 FROM openjdk:17
 
 # Copia el archivo JAR de la aplicación en el contenedor
-COPY block7-crud-validation.jar block.jar
+COPY target/block7-crud-validation.jar block.jar
 
 # Expone el puerto en el que la aplicación se ejecuta dentro del contenedor
 EXPOSE 8080
