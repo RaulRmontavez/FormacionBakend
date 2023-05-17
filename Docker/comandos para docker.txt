@@ -1,0 +1,39 @@
+docker network create mynetwork //Para la red
+
+//Crear contenedor postgres
+docker run --name postgres-container -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=contrasena -e POSTGRES_DB=test --network my-network -d postgres:latest
+
+
+
+
+Crear el docker con el jar y el archivo docker
+docker build -t block7-crud-validation.jar -f Dockerfile .
+
+
+# Utiliza una imagen base de Java
+FROM openjdk:17
+
+ 
+
+# Copia el archivo JAR de la aplicación en el contenedor
+COPY target/your-application.jar app.jar
+
+ 
+
+# Expone el puerto en el que la aplicación se ejecuta dentro del contenedor
+EXPOSE 8080
+
+ 
+
+# Comando para ejecutar la aplicación cuando se inicie el contenedor
+CMD ["java", "-jar", "app.jar"]
+
+docker build -t spring-app .
+docker run --name spring-app-container -p 8080:8080 --network my-network -d spring-app
+
+
+ 
+
+
+
+
