@@ -1,40 +1,27 @@
 package com.raul.block11uploaddownloadfiles;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
 import java.util.stream.Stream;
-@Service
-public class StorageProperties implements StorageService {
-    @Override
-    public void init() {
+@ConfigurationProperties("storage")
+public class StorageProperties {
 
+    /**
+     * Folder location for storing files
+     */
+    private String location = "upload-dir";
+
+    public String getLocation() {
+        return location;
     }
 
-    @Override
-    public void store(MultipartFile file) {
-
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    @Override
-    public Stream<Path> loadAll() {
-        return null;
-    }
-
-    @Override
-    public Path load(String filename) {
-        return null;
-    }
-
-    @Override
-    public Resource loadAsResource(String filename) {
-        return null;
-    }
-
-    @Override
-    public void deleteAll() {
-
-    }
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -33,10 +34,9 @@ public class FileUploadController {
         this.storageService = storageService;
     }
 
-
     @GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
-
+        System.out.println("Cargo");
         model.addAttribute("files", storageService.loadAll().map(
                         path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
                                 "serveFile", path.getFileName().toString()).build().toUri().toString())
@@ -48,7 +48,7 @@ public class FileUploadController {
     @GetMapping("/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-
+        System.out.println("Hola entre");
         Resource file = storageService.loadAsResource(filename);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
@@ -65,8 +65,8 @@ public class FileUploadController {
         return "redirect:/";
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleStorageFileNotFound(Exception exc) {
+    @ExceptionHandler(StorageException.class)
+    public ResponseEntity<?> handleStorageFileNotFound(StorageException exc) {
         return ResponseEntity.notFound().build();
     }
 
