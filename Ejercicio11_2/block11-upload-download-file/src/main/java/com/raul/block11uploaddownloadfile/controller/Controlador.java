@@ -30,7 +30,7 @@ public class Controlador {
     FileService fileService;
     @Autowired
     FileRepository fileRepository;
-    int contador= 0;
+
 
     @RequestMapping(method = POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity addFile(@RequestParam(name = "ruta", defaultValue = "guardarficheros", required = false) String ruta, @RequestParam("file")MultipartFile file){
@@ -51,12 +51,11 @@ public class Controlador {
             file.transferTo(Path.of(directorio + "/" + file.getOriginalFilename()));
 
             /*file.transferTo(new File("/guardarficheros/" + ruta));*/
-            contador = contador + 1;
+
             FilesO archivoDatos = new FilesO();
             archivoDatos.setName(file.getOriginalFilename());
             archivoDatos.setFecha(LocalDateTime.now().toString());
             archivoDatos.setCategoria(StringUtils.getFilenameExtension(archivoDatos.getName()));
-            archivoDatos.setId(contador);
             archivoDatos.setRuta(ruta);
             fileRepository.save(archivoDatos);
             return ResponseEntity.status(HttpStatus.CREATED).body(archivoDatos);

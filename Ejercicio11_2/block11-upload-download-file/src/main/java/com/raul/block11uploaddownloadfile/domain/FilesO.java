@@ -2,6 +2,7 @@ package com.raul.block11uploaddownloadfile.domain;
 
 import com.raul.block11uploaddownloadfile.FileOutputDto;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 public class FilesO {
     @Id
-    //@GeneratedValue
+    @GeneratedValue
     private int id;
     private String name;
     private String fecha;
