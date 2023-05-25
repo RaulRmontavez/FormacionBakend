@@ -13,7 +13,7 @@ public interface PersonaRepository extends JpaRepository<Persona,Integer> {
     List<Persona> findAll();
    // @Query("select p from Persona where s.name = ?1")
     //Persona getPersonaByLastName(String name);
-   List<PersonaOutputDto> getCustomQuery(HashMap<String, Object> conditions);
+   List<PersonaOutputDto> getCustomQuery(HashMap<String, Object> conditions,String ord);
 
 
 }

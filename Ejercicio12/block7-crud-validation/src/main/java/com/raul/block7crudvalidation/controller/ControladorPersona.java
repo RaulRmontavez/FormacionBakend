@@ -56,7 +56,9 @@ public class ControladorPersona {
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String surname,
             @RequestParam(required = false) String usuario,
-            @RequestParam(required = false) String created_date) {
+            @RequestParam(required = false) String created_date,
+            @RequestParam(required = false,defaultValue = "asc") String ord)
+             {
 
         HashMap<String, Object> data = new HashMap<>();
 
@@ -65,7 +67,7 @@ public class ControladorPersona {
         if(usuario != null) data.put ("usuario", usuario);
         if(created_date != null) data.put ("created_date", created_date);
 
-        return personaRepository.getCustomQuery(data);
+        return personaRepository.getCustomQuery(data,ord);
     }
 
 
