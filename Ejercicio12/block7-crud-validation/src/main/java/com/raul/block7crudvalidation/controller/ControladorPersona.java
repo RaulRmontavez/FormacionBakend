@@ -58,7 +58,9 @@ public class ControladorPersona {
             @RequestParam(required = false) String usuario,
             @RequestParam(required = false) String created_date,
             @RequestParam(required = false,defaultValue = "asc") String ord,
-            @RequestParam (required = false,defaultValue = "none") String order)
+            @RequestParam (required = false,defaultValue = "none") String order,
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "10", required = false) int pageSize)
              {
 
         HashMap<String, Object> data = new HashMap<>();
@@ -70,7 +72,7 @@ public class ControladorPersona {
         if (!ord.equals("asc") && !ord.equals("desc")) ord = "asc";
         if(!order.equals("name") && !order.equals("usuario")) order = "none";
 
-        return personaRepository.getCustomQuery(data,ord,order);
+        return personaRepository.getCustomQuery(data,ord,order,pageNumber, pageSize);
     }
 
 
