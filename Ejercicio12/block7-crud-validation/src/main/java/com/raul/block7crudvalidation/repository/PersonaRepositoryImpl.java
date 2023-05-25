@@ -21,7 +21,7 @@ public class PersonaRepositoryImpl {
     private EntityManager entityManager;
 
     public List<PersonaOutputDto> getCustomQuery(
-            HashMap<String, Object> conditions,String ord) {
+            HashMap<String, Object> conditions,String ord,String order) {
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Persona> query = cb.createQuery(Persona.class);
@@ -52,8 +52,22 @@ public class PersonaRepositoryImpl {
             }
 
             if (ord.equals("desc")){
-                query.orderBy(cb.desc(root.get(field)));
+                if (order.equals("none")) {
+                    query.orderBy(cb.desc(root.get(field)));
+                }
+                else{
+                    query.orderBy(cb.desc(root.get(order)));
+                }
             }
+            else{
+                if (order.equals("none")) {
+                    query.orderBy(cb.asc(root.get(field)));
+                }
+                else {
+                    query.orderBy(cb.asc(root.get(order)));
+                }
+            }
+
         });
         query.select(root)
                 .where(predicates.toArray(new Predicate[predicates.size()]));
