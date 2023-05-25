@@ -10,14 +10,18 @@ import com.raul.block7crudvalidation.exceptions.EntityNotFoundException;
 import com.raul.block7crudvalidation.exceptions.UnprocessableEntityException;
 import com.raul.block7crudvalidation.repository.PersonaRepository;
 import com.raul.block7crudvalidation.repository.StudentRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
+import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service

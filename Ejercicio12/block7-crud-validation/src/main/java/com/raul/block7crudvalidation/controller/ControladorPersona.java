@@ -5,6 +5,8 @@ import com.raul.block7crudvalidation.Application.ProfesorService;
 import com.raul.block7crudvalidation.controller.dto.PersonaInputDto;
 import com.raul.block7crudvalidation.controller.dto.PersonaOutputDto;
 import com.raul.block7crudvalidation.controller.dto.ProfesorOutputDto;
+import com.raul.block7crudvalidation.repository.PersonaRepository;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
 @RestController
 @RequestMapping("/persona")
@@ -23,6 +26,9 @@ public class ControladorPersona {
 
     @Autowired
     ProfesorService profesorService;
+
+    @Autowired
+    PersonaRepository personaRepository;
     @Autowired
 
     ProfesorClient profesorClient;
@@ -44,6 +50,24 @@ public class ControladorPersona {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/customquery")
+    public Iterable<PersonaOutputDto> findPersonaByData(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String surname,
+            @RequestParam(required = false) String usuario,
+            @RequestParam(required = false) String created_date) {
+
+        HashMap<String, Object> data = new HashMap<>();
+
+        if(name != null) data.put("name",name);
+        if(surname != null) data.put ("surname", surname);
+        if(usuario != null) data.put ("usuario", usuario);
+        if(created_date != null) data.put ("created_date", created_date);
+
+        return personaRepository.getCustomQuery(data);
+    }
+
 
    /* @GetMapping("/profesor/{id}")
     public ResponseEntity<ProfesorOutputDto> getProfesor(@PathVariable int id) {

@@ -13,11 +13,15 @@ import com.raul.block7crudvalidation.exceptions.UnprocessableEntityException;
 import com.raul.block7crudvalidation.repository.PersonaRepository;
 import com.raul.block7crudvalidation.repository.ProfesorRepository;
 import com.raul.block7crudvalidation.repository.StudentRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,6 +54,9 @@ public class ProfesorServiceImpl implements ProfesorService {
         return profesorRepository.save(profe).profesorOutputDto();
         //}
     }
+
+
+
 
     @Override
     public ProfesorOutputDto getProfesorById(int id) {
