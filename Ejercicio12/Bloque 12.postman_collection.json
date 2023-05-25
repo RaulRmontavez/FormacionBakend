@@ -1,0 +1,18 @@
+{
+	"info": {
+		"_postman_id": "b5a4e9cb-d632-4df2-a0ee-6ece2e9b938f",
+		"name": "Bloque 12",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26939952"
+	},
+	"item": [
+		{
+			"name": "CustomQuery",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
