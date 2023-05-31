@@ -52,8 +52,8 @@ public class Controlador {
     public ResponseEntity<PersonaOutputDto> updatePerson(@PathVariable("id") String id, @RequestBody PersonaInputDto updatedPerson) {
         Persona existingPerson = personDAL.getPersonById(id);
         if (existingPerson != null) {
-            Persona updatedPersona = personDAL.updateOnePerson(new Persona(updatedPerson));
-            return ResponseEntity.ok(existingPerson.personaToPersonaOutputDto());
+            Persona updatedPersona = personDAL.updateOnePerson(new Persona(updatedPerson),id);
+            return ResponseEntity.ok(updatedPersona.personaToPersonaOutputDto());
         } else {
             return ResponseEntity.notFound().build();
         }

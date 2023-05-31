@@ -16,7 +16,7 @@ public interface PersonDAL {
     List<Persona> findByAgeRange(int lowerBound, int upperBound);
     List<Persona> findByFavoriteBooks(String favoriteBook);
     void updateMultiplePersonAge();
-    Persona updateOnePerson(Persona person);
+    Persona updateOnePerson(Persona person,String id);
     void deletePerson(Persona person);
     Persona getPersonById(String id);
 }

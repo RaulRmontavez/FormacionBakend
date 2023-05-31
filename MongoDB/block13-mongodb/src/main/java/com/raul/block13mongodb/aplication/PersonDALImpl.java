@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PersonDALImpl implements PersonDAL {
@@ -92,9 +93,10 @@ public class PersonDALImpl implements PersonDAL {
         mongoTemplate.findAndModify(query, update, Persona.class);;
     }
     @Override
-    public Persona updateOnePerson(Persona persona) {
-        mongoTemplate.save(persona);
-        return persona;
+    public Persona updateOnePerson(Persona persona,String id) {
+                persona.setPersonId(id);
+                return mongoTemplate.save(persona);
+
     }
 
     @Override
