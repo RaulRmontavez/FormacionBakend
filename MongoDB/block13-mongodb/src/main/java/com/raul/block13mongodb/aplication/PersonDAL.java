@@ -18,4 +18,5 @@ public interface PersonDAL {
     void updateMultiplePersonAge();
     Persona updateOnePerson(Persona person);
     void deletePerson(Persona person);
+    Persona getPersonById(String id);
 }

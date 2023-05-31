@@ -1,5 +1,7 @@
 package com.raul.block13mongodb.domain;
 
+import com.raul.block13mongodb.Dto.PersonaInputDto;
+import com.raul.block13mongodb.Dto.PersonaOutputDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,7 @@ import java.util.UUID;
 @Document(collection = "person")
 public class Persona {
     @Id
-    private UUID personId;
+    private String personId;
     private String name;
     private long age;
     private List<String> favoriteBooks;
@@ -25,10 +27,22 @@ public class Persona {
 
 
     public Persona(String name, List<String> favoriteBooks,long age, Date dateOfBirth) {
-        this.personId = UUID.randomUUID();
+        this.personId = UUID.randomUUID().toString();
         this.name = name;
         this.age = age;
         this.favoriteBooks = favoriteBooks;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public Persona(PersonaInputDto persona) {
+        this.personId = UUID.randomUUID().toString();
+        this.name = persona.getName();
+        this.age = persona.getAge();
+        this.favoriteBooks = persona.getFavoriteBooks();
+        this.dateOfBirth = persona.getDateOfBirth();
+    }
+
+    public PersonaOutputDto personaToPersonaOutputDto() {
+        return new PersonaOutputDto(this.personId, this.name, this.age, this.favoriteBooks, this.dateOfBirth);
     }
 }

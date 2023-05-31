@@ -30,6 +30,14 @@ public class PersonDALImpl implements PersonDAL {
     }
 
     @Override
+    public Persona getPersonById(String id) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(id));
+        return mongoTemplate.findOne(query, Persona.class);
+    }
+
+
+    @Override
     public List<Persona> getAllPerson() {
         return mongoTemplate.findAll(Persona.class);
     }
