@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "d69c1615-401f-4370-a5b0-b181a69c3f24",
+		"name": "MongoDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26939952"
+	},
+	"item": [
+		{
+			"name": "Ejercicio MongoDB Agregar persona",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"name\": \"Raul\",\r\n        \"age\": 19,\r\n        \"favouriteBooks\": [\"librito\",\"casita\"],\r\n        \"dateOfBirth\": \"11/07/2003\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona/addperson",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"addperson"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ejercicio MongoDB  Eliminar persona",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"name\": \"Raul\",\r\n        \"age\": 19,\r\n        \"favouriteBooks\": [\"librito\",\"casita\"],\r\n        \"dateOfBirth\": \"11/07/2003\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ejercicio MongoDB  Update persona",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"name\": \"Raul\",\r\n        \"age\": 20,\r\n        \"favouriteBooks\": [\"librito\",\"casita\"],\r\n        \"dateOfBirth\": \"2021-01-15T06:31:15Z\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/persona/49589b2a-f01d-495b-9cda-e0d755fac64e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"persona",
+						"49589b2a-f01d-495b-9cda-e0d755fac64e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ejercicio MongoDB  Listado de persona",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"name\": \"Raul\",\r\n        \"age\": 19,\r\n        \"favouriteBooks\": [\"librito\",\"casita\"],\r\n        \"dateOfBirth\": \"11/07/2003\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ejercicio MongoDB  Listado de persona Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"name\": \"Raul\",\r\n        \"age\": 19,\r\n        \"favouriteBooks\": [\"librito\",\"casita\"],\r\n        \"dateOfBirth\": \"11/07/2003\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
