@@ -47,7 +47,7 @@ public class Persona {
     }
 
     public Persona(PersonaInputDto persona) {
-
+        id_persona = persona.getId_persona();
         usuario = persona.getUsuario();
         password = persona.getPassword();
         name = persona.getName();
